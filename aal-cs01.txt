@@ -1,0 +1,18 @@
+en
+conf t
+hostname aal-cs01
+ip routing
+interface Gi0/1
+ no switchport
+ ip address 10.1.0.2 255.255.255.252
+interface Gi0/2
+ no switchport
+ ip address 10.1.1.1 255.255.255.252
+interface Gi0/3
+ no switchport
+ ip address 10.255.0.1 255.255.255.252
+router ospf 1
+ network 10.1.0.0 0.0.0.3 area 0
+ network 10.1.1.0 0.0.0.3 area 0
+ network 10.255.0.0 0.0.0.3 area 0
+exit

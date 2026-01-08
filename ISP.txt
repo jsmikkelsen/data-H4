@@ -1,0 +1,16 @@
+en
+conf t
+hostname ISP
+interface Gi0/0
+ description WAN-INTERNET (DHCP-CLIENT)
+ ip address dhcp
+ ip nat outside
+interface Serial0/0/1
+ description LINK-TO-AAL-ER01 (Serial0/0/1)
+ ip address 10.0.0.1 255.255.255.252
+ ip nat inside
+interface Serial0/0/0
+ description LINK-TO-SVE-ER01 (Serial0/0/0)
+ ip address 10.0.0.5 255.255.255.252
+ ip nat inside
+exit

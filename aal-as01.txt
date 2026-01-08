@@ -1,0 +1,11 @@
+en
+conf t
+hostname aal-as01
+vlan 10,20,30,40
+interface Gi0/24
+ switchport mode trunk
+interface Gi0/1
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+exit

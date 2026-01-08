@@ -1,0 +1,11 @@
+en
+conf t
+hostname sve-er01
+interface Gi0/0
+ ip address 10.0.0.6 255.255.255.252
+interface Gi0/1
+ ip address 10.2.0.1 255.255.255.252
+router ospf 1
+ network 10.0.0.4 0.0.0.3 area 0
+ network 10.2.0.0 0.0.0.3 area 0
+exit
