@@ -1,11 +1,172 @@
-en
-conf t
+aal-as01#sh run
+Building configuration...
+
+Current configuration : 3021 bytes
+!
+! Last configuration change at 05:29:39 UTC Thu Mar 4 1993 by admin
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
 hostname aal-as01
-vlan 10,20,30,40
-interface Gi0/24
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$TopW$QC91pRRI97XEkE1TL9eGT1
+!
+username admin privilege 15 secret 5 $1$ZDJC$z5YjA2zgG8NNOxmrKeKTp1
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+ip domain-name gruppe6.norfa.dk
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
  switchport mode trunk
-interface Gi0/1
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+ description access port vmh01 mgmt
+ switchport access vlan 50
  switchport mode access
- switchport access vlan 10
  spanning-tree portfast
-exit
+!
+interface FastEthernet0/3
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface FastEthernet0/4
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface FastEthernet0/5
+ description access port
+ switchport access vlan 30
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ description access port vmh02
+ switchport access vlan 10
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ switchport mode trunk
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ description access port vmh02
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ switchport mode trunk
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+ description access port vmh01 mgmt
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ description test port
+ switchport access vlan 30
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ description test port
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ no ip address
+!
+interface Vlan20
+ no ip address
+!
+interface Vlan30
+ description MANAGEMENT-INTERFACE
+ ip address 192.1.30.14 255.255.255.0
+!
+interface Vlan40
+ no ip address
+!
+interface Vlan50
+ no ip address
+!
+ip default-gateway 192.1.30.1
+ip http server
+ip http secure-server
+!
+no vstack
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+end

@@ -1,11 +1,137 @@
-en
-conf t
+sve-as01#sh run
+Building configuration...
+
+Current configuration : 2293 bytes
+!
+! Last configuration change at 01:16:58 UTC Mon Mar 1 1993
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
 hostname sve-as01
-vlan 10,20,30,40
-interface Gi0/24
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$Covs$6Tiokdqh7HhcVCSO/SgEH.
+!
+username admin privilege 15 secret 5 $1$c7yZ$nT8R3RgLrnaq2KRNFhjG6/
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+ip domain-name gruppe6.norfa.dk
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface Port-channel2
+ description Link to sve-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
  switchport mode trunk
-interface Gi0/1
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+ description access port vmh02 mgmt
+ switchport access vlan 51
  switchport mode access
- switchport access vlan 10
  spanning-tree portfast
-exit
+!
+interface FastEthernet0/3
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ switchport mode trunk
+ channel-group 2 mode active
+!
+interface FastEthernet0/4
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ switchport mode trunk
+ channel-group 2 mode active
+!
+interface FastEthernet0/5
+ description access port vmh02
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ switchport mode trunk
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ description access port vmh01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ switchport mode trunk
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+!
+interface Vlan31
+ ip address 192.2.31.14 255.255.255.0
+!
+ip http server
+ip http secure-server
+!
+no vstack
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+end
