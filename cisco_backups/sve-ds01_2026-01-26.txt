@@ -1,0 +1,339 @@
+Building configuration...
+
+Current configuration : 7534 bytes
+!
+! Last configuration change at 21:21:02 UTC Tue Mar 9 1993 by admin
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sve-ds01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$/mE6$J3czIi39nRxbiRNEpIeq51
+!
+username admin privilege 15 secret 5 $1$Ff6z$TeoM7Q7GE/ttYt9s2mRc.0
+no aaa new-model
+system mtu routing 1500
+ip routing
+ip domain-name gruppe6.norfa.dk
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1087364736
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1087364736
+ revocation-check none
+ rsakeypair TP-self-signed-1087364736
+!
+!
+crypto pki certificate chain TP-self-signed-1087364736
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31303837 33363437 3336301E 170D3933 30333031 30303033 
+  30395A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 30383733 
+  36343733 3630819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  81009535 4059583D 031A3063 20E31EC2 5EC3FD3F 25610F51 3FDC8A8B 8D7AE435 
+  93F4A497 29B7180C 31D7F740 454598FD FD812D71 38BC62CC 15940B3B 49F24515 
+  0696E0DE 98D01A2F A6FF9153 F19106CA 573AE042 6959E10F 55C57FD7 0DE450FE 
+  2542D088 9A337897 6B2E6AA5 CCC3AED0 7402C1D0 FA4AF371 3C1DA687 1551F847 
+  B7130203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 14F01F71 A215A808 48E4E5B5 1E0C01E6 178EA342 86301D06 
+  03551D0E 04160414 F01F71A2 15A80848 E4E5B51E 0C01E617 8EA34286 300D0609 
+  2A864886 F70D0101 05050003 81810046 97E29356 EC1DF14F 3038C5B9 F8317ABD 
+  84B01078 665B59B8 7C85F374 446C4A01 3E41C144 C552011B 777F5EBB 5BAFFBDC 
+  03300BF1 C8270154 7EC6F9C2 B5E05EB3 FFDBE83B A64E142E 4FC15FC0 C9F967CC 
+  A1805C6E 998F9810 52D0F783 DEE215A8 3C8832EE 23649B35 44A1DBB2 163BAA67 
+  AF3B8D0C 00D70B4A 9C02E152 37D421
+  	quit
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel2
+ description link to sve-as01
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+!
+interface GigabitEthernet0/1
+ description link to aal-as01
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ description link to sve-cs01
+ no switchport
+ ip address 10.2.1.2 255.255.255.252
+!
+interface GigabitEthernet0/3
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ channel-group 2 mode active
+!
+interface GigabitEthernet0/4
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ channel-group 2 mode active
+!
+interface GigabitEthernet0/5
+ description link to aal-cs01
+ no switchport
+ ip address 10.255.0.6 255.255.255.252
+!
+interface GigabitEthernet0/6
+ description link to aal-ds01
+ no switchport
+ ip address 10.255.0.14 255.255.255.252
+!
+interface GigabitEthernet0/7
+!
+interface GigabitEthernet0/8
+!
+interface GigabitEthernet0/9
+!
+interface GigabitEthernet0/10
+!
+interface GigabitEthernet0/11
+!
+interface GigabitEthernet0/12
+!
+interface GigabitEthernet0/13
+!
+interface GigabitEthernet0/14
+!
+interface GigabitEthernet0/15
+!
+interface GigabitEthernet0/16
+!
+interface GigabitEthernet0/17
+!
+interface GigabitEthernet0/18
+!
+interface GigabitEthernet0/19
+!
+interface GigabitEthernet0/20
+!
+interface GigabitEthernet0/21
+!
+interface GigabitEthernet0/22
+!
+interface GigabitEthernet0/23
+!
+interface GigabitEthernet0/24
+!
+interface GigabitEthernet0/25
+!
+interface GigabitEthernet0/26
+!
+interface GigabitEthernet0/27
+!
+interface GigabitEthernet0/28
+!
+interface GigabitEthernet0/29
+!
+interface GigabitEthernet0/30
+!
+interface GigabitEthernet0/31
+!
+interface GigabitEthernet0/32
+!
+interface GigabitEthernet0/33
+ description access port vmh02 mgmt
+ switchport access vlan 51
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/34
+!
+interface GigabitEthernet0/35
+ description access port vmh02
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ spanning-tree portfast
+!
+interface GigabitEthernet0/36
+ description access port vmh01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51
+ spanning-tree portfast
+!
+interface GigabitEthernet0/37
+!
+interface GigabitEthernet0/38
+!
+interface GigabitEthernet0/39
+!
+interface GigabitEthernet0/40
+!
+interface GigabitEthernet0/41
+!
+interface GigabitEthernet0/42
+!
+interface GigabitEthernet0/43
+!
+interface GigabitEthernet0/44
+!
+interface GigabitEthernet0/45
+!
+interface GigabitEthernet0/46
+!
+interface GigabitEthernet0/47
+!
+interface GigabitEthernet0/48
+!
+interface GigabitEthernet0/49
+!
+interface GigabitEthernet0/50
+!
+interface GigabitEthernet0/51
+!
+interface GigabitEthernet0/52
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ ip address 192.1.10.3 255.255.255.0
+ standby version 2
+ standby 1 ip 192.1.10.1
+ standby 1 priority 90
+ standby 1 preempt
+!
+interface Vlan11
+ ip address 192.2.11.3 255.255.255.0
+ standby version 2
+ standby 6 ip 192.2.11.1
+ standby 6 preempt
+!
+interface Vlan20
+ ip address 192.1.20.3 255.255.255.0
+ ip helper-address 192.1.10.10
+ ip helper-address 192.2.11.10
+ standby version 2
+ standby 2 ip 192.1.20.1
+ standby 2 priority 90
+ standby 2 preempt
+!
+interface Vlan21
+ ip address 192.2.21.3 255.255.255.0
+ ip helper-address 192.1.10.10
+ ip helper-address 192.2.11.10
+ standby version 2
+ standby 7 ip 192.2.21.1
+ standby 7 preempt
+!
+interface Vlan30
+ ip address 192.1.30.3 255.255.255.0
+ standby version 2
+ standby 3 ip 192.1.30.1
+ standby 3 priority 90
+ standby 3 preempt
+!
+interface Vlan31
+ ip address 192.2.31.13 255.255.255.0 secondary
+ ip address 192.2.31.3 255.255.255.0
+ standby version 2
+ standby 8 ip 192.2.31.1
+ standby 8 preempt
+!
+interface Vlan40
+ ip address 192.1.40.3 255.255.255.0
+ standby version 2
+ standby 4 ip 192.1.40.1
+ standby 4 priority 90
+ standby 4 preempt
+!
+interface Vlan41
+ ip address 192.2.41.3 255.255.255.0
+ standby version 2
+ standby 9 ip 192.2.41.1
+ standby 9 preempt
+!
+interface Vlan50
+ ip address 192.1.50.3 255.255.255.0
+ standby version 2
+ standby 5 ip 192.1.50.1
+ standby 5 priority 90
+ standby 5 preempt
+!
+interface Vlan51
+ ip address 192.2.51.3 255.255.255.0
+ standby version 2
+ standby 10 ip 192.2.51.1
+ standby 10 preempt
+!
+interface Vlan60
+ ip address 192.1.60.3 255.255.255.0
+ ip access-group guest-wifi in
+ standby version 2
+ standby 11 ip 192.1.60.1
+ standby 11 priority 90
+ standby 11 preempt
+!
+router ospf 1
+ router-id 192.2.31.13
+ passive-interface Vlan11
+ passive-interface Vlan21
+ passive-interface Vlan31
+ passive-interface Vlan41
+ passive-interface Vlan51
+ network 10.0.0.0 0.255.255.255 area 0
+ network 192.0.0.0 0.255.255.255 area 0
+!
+ip http server
+ip http secure-server
+!
+!
+!
+ip access-list extended guest-wifi
+ permit tcp 192.1.60.0 0.0.0.255 host 192.1.40.10 eq 8880
+ deny   ip 192.1.60.0 0.0.0.255 192.1.0.0 0.0.255.255
+ deny   ip 192.1.60.0 0.0.0.255 192.2.0.0 0.0.255.255
+ deny   ip 192.1.60.0 0.0.0.255 10.0.0.0 0.255.255.255
+ deny   ip 192.1.60.0 0.0.0.255 192.0.0.0 0.0.255.255
+ permit ip 192.1.60.0 0.0.0.255 any
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+end

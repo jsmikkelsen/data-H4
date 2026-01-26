@@ -1,0 +1,217 @@
+Building configuration...
+
+
+Current configuration : 4757 bytes
+!
+! Last configuration change at 02:33:31 UTC Sun Jan 11 2015 by admin
+!
+version 16.9
+service config
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+!
+hostname ISP
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 5 $1$8mgJ$wFfg67TA6zRT4xE5.Qi9b0
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name gruppe6.norfa.dk
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-520231530
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-520231530
+ revocation-check none
+ rsakeypair TP-self-signed-520231530
+!
+!
+crypto pki certificate chain TP-self-signed-520231530
+ certificate self-signed 01
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 35323032 33313533 30301E17 0D313530 31303130 30303535 
+  355A170D 33303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3532 30323331 
+  35333030 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 B5CCF2FD 258CECDF EA011758 8D393D93 4CB8FD8C 62AA4854 1AF610E9 
+  109989CA D230A4D4 6905AD9B 093E4A56 8DB64811 BAD5D92A 87CC3DE2 3756B547 
+  51BC86D1 EF728C25 03629275 F867CA14 80E0B02D 7929BB34 0CAA7356 347A1578 
+  E4517B67 A8E47BDD FA83D3E3 C7A9BF56 3AA266E6 C36553DC 7BAAEFCD D682D9DF 
+  8C5D32FF C412E05D 3B9391DC B3F0B4CD B44C7E5E 6EF4360E F5839A52 7C2D0125 
+  B51BD6B6 5A0CE10A F6FF373E B9EAB8BD F332CD8C CEFD1D06 3727E21E AB7FEE0F 
+  EA6648E5 509D1131 2FFBAABD FC8AB2ED 0F268AE6 D96A0CC7 8B880A49 0299E701 
+  67E1F4C4 D45DC8AA FF12A75A 4BCFB936 EC9F05B6 E2BDC32C 3E1D54A8 14A7EFCA 
+  6F27F679 02030100 01A35330 51300F06 03551D13 0101FF04 05300301 01FF301F 
+  0603551D 23041830 168014EE 6BE694DB D4A2CA28 A74E2781 E6A864AA 5BA4A430 
+  1D060355 1D0E0416 0414EE6B E694DBD4 A2CA28A7 4E2781E6 A864AA5B A4A4300D 
+  06092A86 4886F70D 01010505 00038201 01005234 C04F05D6 92682522 F03CD5DD 
+  772E3A45 241AE4CB 340ED151 1AEFACE9 7DD29AF4 1B216980 B41ED003 9415F339 
+  5A2C10A4 2D66E4AA 3E067122 33A718DA 9E502EA1 B97FF4B3 BFFF2AFE C15AA6A1 
+  616A7061 9D7CC684 F006701B 905E13AF C05ED843 33589509 2EBE037D DCE142C9 
+  A3BF630E E1DAD9CE 8BD1555B B369928E 7FFD8AF3 3D52653F 02331001 2F16167C 
+  66A2B017 C8723D86 F4F00A27 4D07C481 30E39A48 07468E27 321E714F EAE3EA2D 
+  AD869FDC B131B53C 95DD2691 80E010EB 36566263 AD93D6BC 1E4233E0 914DFCE1 
+  2541683C 0BA4B835 DBD83611 467C43DD 03012D1D 98CC830B F9727E59 9C421D45 
+  0913C1F9 22645EFB 7329F606 49CCBF05 DCE8
+  	quit
+!
+license udi pid ISR4331/K9 sn FDO20020Q1D
+license accept end user agreement
+license boot suite FoundationSuiteK9
+license boot level securityk9
+no license smart enable
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+username admin privilege 15 secret 5 $1$be6Y$ORKwdznfssVgY2J/XE.n40
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback30
+ description Management
+ ip address 192.0.30.10 255.255.255.255
+!
+interface Loopback31
+ description Management
+ ip address 192.0.31.10 255.255.255.255
+!
+interface GigabitEthernet0/0/0
+ description Link to aal-er01 
+ ip address 10.0.0.1 255.255.255.252
+ ip nat inside
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ description Link to sve-er01 
+ ip address 10.0.0.5 255.255.255.252
+ ip nat inside
+ negotiation auto
+!
+interface GigabitEthernet0/0/2
+ description Link to Internet 
+ ip address dhcp
+ ip nat outside
+ negotiation auto
+!
+interface Serial0/1/0
+!
+interface Serial0/1/1
+!
+interface Serial0/1/2
+!
+interface Serial0/1/3
+!
+interface GigabitEthernet0
+ vrf forwarding Mgmt-intf
+ no ip address
+ shutdown
+ negotiation auto
+!
+router ospf 1
+ router-id 192.0.30.10
+ network 10.0.0.0 0.255.255.255 area 0
+ network 192.0.0.0 0.255.255.255 area 0
+ default-information originate
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+ip http client source-interface GigabitEthernet0/0/2
+ip nat inside source list 1 interface GigabitEthernet0/0/2 overload
+ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0/2
+!
+!
+access-list 1 permit 192.0.0.0 0.0.255.255
+access-list 1 permit 192.1.0.0 0.0.255.255
+access-list 1 permit 192.2.0.0 0.0.255.255
+access-list 1 permit 10.0.0.0 0.255.255.255
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ transport input none
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+!
+!
+!
+!
+end

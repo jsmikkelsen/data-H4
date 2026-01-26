@@ -1,0 +1,183 @@
+Building configuration...
+
+Current configuration : 3407 bytes
+!
+! Last configuration change at 15:41:00 UTC Thu Jan 22 2026 by admin
+! NVRAM config last updated at 14:22:05 UTC Wed Jan 21 2026 by admin
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname aal-as01
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 9 $9$o/kWl7kJDKQ7Fa$DWDFymjR1oDcAvb/Wnt3KTWIs9fhFjzqyNkLsyXRg4k
+!
+username admin privilege 15 secret 9 $9$l.gQetC6Y.iTGK$jSb.80DVphvYIbZTrMZXaCjMt6dOq4LYa1xPUSZm7xs
+no aaa new-model
+switch 2 provision ws-c2960x-24pd-l
+!
+!
+!
+!
+!
+!
+ip domain-name gruppe6.norfa.dk
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+!
+interface FastEthernet0
+ no ip address
+!
+interface GigabitEthernet2/0/1
+!
+interface GigabitEthernet2/0/2
+ description access port vmh01 mgmt
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/3
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet2/0/4
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet2/0/5
+ description access port
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/6
+ description access port vmh02
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/7
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/8
+!
+interface GigabitEthernet2/0/9
+!
+interface GigabitEthernet2/0/10
+!
+interface GigabitEthernet2/0/11
+!
+interface GigabitEthernet2/0/12
+!
+interface GigabitEthernet2/0/13
+!
+interface GigabitEthernet2/0/14
+!
+interface GigabitEthernet2/0/15
+ description link to ap
+ switchport access vlan 40
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/16
+ description test link for ap
+ switchport trunk allowed vlan 20,30,40,60
+ switchport trunk native vlan 40
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/17
+ description test link for ap
+ switchport trunk allowed vlan 20,30,40,60
+ switchport trunk native vlan 40
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/18
+ description test link for ap
+ switchport trunk allowed vlan 20,30,40,60
+ switchport trunk native vlan 40
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/19
+!
+interface GigabitEthernet2/0/20
+!
+interface GigabitEthernet2/0/21
+!
+interface GigabitEthernet2/0/22
+!
+interface GigabitEthernet2/0/23
+!
+interface GigabitEthernet2/0/24
+!
+interface GigabitEthernet2/0/25
+!
+interface GigabitEthernet2/0/26
+!
+interface TenGigabitEthernet2/0/1
+!
+interface TenGigabitEthernet2/0/2
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan30
+ ip address 192.1.30.14 255.255.255.0
+!
+!
+ip http server
+ip http secure-server
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+ transport input ssh
+!
+!
+end

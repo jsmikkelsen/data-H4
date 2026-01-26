@@ -1,0 +1,126 @@
+Building configuration...
+
+Current configuration : 1645 bytes
+!
+! Last configuration change at 10:48:46 UTC Wed Jan 21 2026
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sve-er01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$xKWB$SkoAUjQV9JMsfVo56VH9E1
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain name gruppe6.norfa.dk
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FCZ1807C0TJ
+license accept end user agreement
+!
+!
+username admin privilege 15 secret 5 $1$mA4s$2MAjTUZbzHPnkQcjPK7X5/
+!
+redundancy
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback31
+ description management
+ ip address 192.2.31.11 255.255.255.255
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description isp-router
+ ip address 10.0.0.6 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description core-switch
+ ip address 10.2.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 125000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 125000
+!
+router ospf 1
+ router-id 192.2.31.11
+ network 10.0.0.0 0.255.255.255 area 0
+ network 192.0.0.0 0.255.255.255 area 0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.5
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end
