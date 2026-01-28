@@ -1,0 +1,41 @@
+hostname aal-er01
+
+Ip routing
+Ipv6 unicast-routing
+
+interface Loopback30
+description management
+ip ospf 1 area 0
+ip address 192.1.30.11 255.255.255.255
+ipv6 address 2001:db8:1:30::11/64
+ipv6 ospf 1 area 0
+no shutdown
+
+Int g0/0
+description isp-router
+ip ospf 1 area 0
+ip address 10.0.0.2 255.255.255.252
+ipv6 address 2001:db8:0:1::2/64
+ipv6 ospf 1 area 0
+no shutdown
+
+int g0/1
+Description core-switch
+ip ospf 1 area 0
+Ip address 10.1.0.1 255.255.255.252
+Ipv6 address 2001:db8:1:F1::1/64
+ipv6 ospf 1 area 0
+no shutdown
+
+router ospf 1
+router-id 192.1.30.11
+
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+
+ip domain name gruppe6.norfa.dk
+crypto key generate rsa modulus 2048
+username admin privilege 15 secret gruppe6
+enable secret gruppe6
+line vty 0 4 
+login local 
+transport input ssh 

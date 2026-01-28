@@ -1,0 +1,56 @@
+hostname ISP
+no ip domain lookup
+Ipv6 unicast-routing
+
+router ospf 1 
+router-id 192.0.30.10
+default-information originate
+
+access-list 1 permit 192.0.0.0 0.0.255.255
+access-list 1 permit 192.1.0.0 0.0.255.255
+access-list 1 permit 192.2.0.0 0.0.255.255
+access-list 1 permit 10.0.0.0 0.255.255.255
+
+ip nat inside source list 1 interface g0/2 overload
+
+ip route 0.0.0.0 0.0.0.0 g0/2
+
+interface Loopback30 
+description Management
+ip address 192.0.30.10 255.255.255.255
+no shutdown
+
+interface g0/2
+description Link to Internet
+ip address dhcp
+Ipv6 address dhcp
+ip nat outside 
+no shutdown
+
+Interface g0/0
+description Link to aal-er01
+ip ospf 1 area 0
+ip address 10.0.0.1 255.255.255.252
+Ipv6 address 2001:db8:0:1::1/64
+ipv6 ospf 1 area 0
+Ip nat inside 
+no shutdown
+
+interface g0/1
+description Link to sve-er01
+ip ospf 1 area 0
+ip address 10.0.0.5 255.255.255.252
+Ipv6 address 2001:db8:0:2::1/64
+ipv6 ospf 1 area 0
+Ip nat inside
+no shutdown
+
+
+ip domain name gruppe6.norfa.dk
+crypto key generate rsa modulus 2048
+username admin privilege 15 secret gruppe6
+enable secret gruppe6
+line vty 0 4 
+login local 
+transport input ssh 
+

@@ -1,0 +1,213 @@
+Building configuration...
+
+Current configuration : 5015 bytes
+!
+! Last configuration change at 12:05:13 UTC Tue Jan 27 2026
+! NVRAM config last updated at 12:05:17 UTC Tue Jan 27 2026
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname aal-as01
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 9 $9$o/kWl7kJDKQ7Fa$DWDFymjR1oDcAvb/Wnt3KTWIs9fhFjzqyNkLsyXRg4k
+!
+username admin privilege 15 secret 9 $9$l.gQetC6Y.iTGK$jSb.80DVphvYIbZTrMZXaCjMt6dOq4LYa1xPUSZm7xs
+no aaa new-model
+switch 2 provision ws-c2960x-24pd-l
+!
+!
+!
+!
+!
+!
+ip domain-name gruppe6.norfa.dk
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2692787968
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2692787968
+ revocation-check none
+ rsakeypair TP-self-signed-2692787968
+!
+!
+crypto pki certificate chain TP-self-signed-2692787968
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32363932 37383739 3638301E 170D3236 30313237 31323035 
+  31375A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 36393237 
+  38373936 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100C3DD 8CEA6CE7 B20F1BE6 0F6C8567 B93305AD 3337CE2D AFCC05FA A85066D9 
+  6AC410EB 60B8F72E A2770BD3 93A9D1F7 B37094BA E43C35BA 2274DD3A E0D60FFC 
+  9E19F7B4 6D477626 C50352B1 564A6655 D0831CB1 9AF59130 4ABA467A AB2291D3 
+  DB0CA1C0 3E9D5801 E753237C 039E6F26 D940E8D7 DC70DAB6 D197CBD1 C6D81D6D 
+  F1770203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 1485A33F FDC2124A 9F5961B8 6E4DD868 20EA52AC 55301D06 
+  03551D0E 04160414 85A33FFD C2124A9F 5961B86E 4DD86820 EA52AC55 300D0609 
+  2A864886 F70D0101 05050003 8181003A 2A8A8899 CE84918B C21E7642 776072F3 
+  3496DDCD 8BF80347 0C2D7615 2D460BB2 7F187800 AB851D45 E0F471C2 49133DE9 
+  F86EAAA6 B2C283D5 E22E4E73 1C5180AB F5C96B8F 24E67B95 FF0159EE 255BD98E 
+  4B00D7EF E307AC19 EFA11DE1 2FF029C0 165A2566 2CEA6463 F14B0309 5D2FC884 
+  14E43B57 AD46E4BC 931201D9 448B89
+  	quit
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+!
+interface FastEthernet0
+ no ip address
+!
+interface GigabitEthernet2/0/1
+!
+interface GigabitEthernet2/0/2
+ description access port vmh01 mgmt
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/3
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet2/0/4
+ description Link to aal-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet2/0/5
+ description access port
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/6
+ description access port vmh02
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/7
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/8
+!
+interface GigabitEthernet2/0/9
+!
+interface GigabitEthernet2/0/10
+!
+interface GigabitEthernet2/0/11
+!
+interface GigabitEthernet2/0/12
+!
+interface GigabitEthernet2/0/13
+!
+interface GigabitEthernet2/0/14
+!
+interface GigabitEthernet2/0/15
+ description link to ap
+ switchport access vlan 40
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface GigabitEthernet2/0/16
+ description test link for ap
+ switchport trunk allowed vlan 20,30,40,60
+ switchport trunk native vlan 40
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/17
+ description test link for ap
+ switchport trunk allowed vlan 20,30,40,60
+ switchport trunk native vlan 40
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/18
+ description test link for ap
+ switchport trunk allowed vlan 20,30,40,60
+ switchport trunk native vlan 40
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/19
+!
+interface GigabitEthernet2/0/20
+!
+interface GigabitEthernet2/0/21
+!
+interface GigabitEthernet2/0/22
+!
+interface GigabitEthernet2/0/23
+!
+interface GigabitEthernet2/0/24
+!
+interface GigabitEthernet2/0/25
+!
+interface GigabitEthernet2/0/26
+!
+interface TenGigabitEthernet2/0/1
+!
+interface TenGigabitEthernet2/0/2
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan30
+ ip address 192.1.30.14 255.255.255.0
+!
+interface Vlan50
+ no ip address
+!
+!
+ip http server
+ip http secure-server
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+ transport input ssh
+!
+!
+end

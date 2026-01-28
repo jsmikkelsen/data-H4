@@ -1,0 +1,257 @@
+hostname aal-ds01
+
+ip routing
+Ipv6 unicast-routing
+
+Vlan 10
+Name aal-server
+Vlan 20
+Name aal-client
+Vlan 30
+Name aal-mgmt
+Vlan 40
+Name aal-wlan
+Vlan 50
+Name aal-vmh
+Vlan 11
+Name sve-server
+Vlan 21
+Name sve-client
+Vlan 31
+Name sve-mgmt
+Vlan 41
+Name sve-wlan
+Vlan 51
+Name sve-vmh
+Vlan 60
+Name guest
+
+
+Int vlan 10
+No shutdown
+ip ospf 1 area 0
+Ip address 192.1.10.2 255.255.255.0
+Ipv6 address 2001:db8:1:10::/64
+Ipv6 address fe80::1 link-local
+ipv6 ospf 1 area 0
+Standby version 2
+Standby 1 ip 192.1.10.1
+Standby 1 priority 100
+Standby 1 preempt
+Standby 2 ipv6 2001:db8:2:10::1/64
+Standby 2 priority 100
+Standby 2 preempt
+
+Int vlan 20
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+ip helper-address 192.1.10.10
+ip helper-address 192.2.11.10
+Ip address 192.1.20.2 255.255.255.0
+Ipv6 address 2001:db8:1:20::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 3 ip 192.1.20.1
+Standby 3 priority 100
+Standby 3 preempt
+Standby 4 ipv6 2001:db8:1:20::1/64
+Standby 4 priority 100
+Standby 4 preempt
+
+
+Int vlan 30
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+Ip address 192.1.30.2 255.255.255.0
+ip address 192.1.30.13 255.255.255.0 secondary 
+Ipv6 address 2001:db8:1:30::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 5 ip 192.1.30.1
+Standby 5 priority 100
+Standby 5 preempt
+Standby 6 ipv6 2001:db8:1:30::1/64
+Standby 6 priority 100
+Standby 6 preempt
+
+
+Int vlan 40
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+Ip address 192.1.40.2 255.255.255.0
+Ipv6 address 2001:db8:1:40::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 7 ip 192.1.40.1
+Standby 7 priority 100
+Standby 7 preempt
+Standby 8 ipv6 2001:db8:1:40::1/64
+Standby 8 priority 100
+Standby 8 preempt
+
+Int vlan 50
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+Ip address 192.1.50.2 255.255.255.0
+Ipv6 address 2001:db8:1:50::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 9 ip 192.1.50.1
+Standby 9 priority 100
+Standby 9 preempt
+Standby 10 ipv6 2001:db8:1:50::1/64
+Standby 10 priority 100
+Standby 10 preempt
+
+
+Int vlan 60
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+Ip address 192.1.60.2 255.255.255.0
+Ipv6 address 2001:db8:1:60::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 11 ip 192.1.60.1
+Standby 11 priority 100
+Standby 11 preempt
+Standby 12 ipv6 2001:db8:1:60::1/64
+Standby 12 priority 100
+Standby 12 preempt
+
+
+Int vlan 11
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+Ip address 192.2.11.2 255.255.255.0
+Ipv6 address 2001:db8:2:11::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 13 ip 192.2.11.1
+Standby 13 priority 90
+Standby 13 preempt
+Standby 14 ipv6 2001:db8:2:11::1/64
+Standby 14 priority 90
+Standby 14 preempt
+
+Int vlan 21
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+ip helper-address 192.1.10.10
+ip helper-address 192.2.11.10
+Ip address 192.2.21.2 255.255.255.0
+Ipv6 address fe80::1 link-local
+Ipv6 address 2001:db8:2:21::2/64
+Standby version 2
+Standby 15 ip 192.2.21.1
+Standby 15 priority 90
+Standby 15 preempt
+Standby 16 ipv6 2001:db8:2:21::1/64
+Standby 16 priority 90
+Standby 16 preempt
+
+Int vlan 31
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+Ip address 192.2.31.2 255.255.255.0
+Ipv6 address 2001:db8:2:31::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 17 ip 192.2.31.1
+Standby 17 priority 90
+Standby 17 preempt
+Standby 18 ipv6 2001:db8:2:31::1/64
+Standby 18 priority 90
+Standby 18 preempt
+
+Int vlan 41
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+Ip address 192.2.41.2 255.255.255.0
+Ipv6 address 2001:db8:2:41::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 19 ip 192.2.41.1
+Standby 19 priority 90
+Standby 19 preempt
+Standby 20 ipv6 2001:db8:2:41::1/64
+Standby 20 priority 90
+Standby 20 preempt
+
+Int vlan 51
+No shutdown
+ip ospf 1 area 0
+ipv6 ospf 1 area 0
+Ip address 192.2.51.2 255.255.255.0
+Ipv6 address 2001:db8:2:51::2/64
+Ipv6 address fe80::1 link-local
+Standby version 2
+Standby 21 ip 192.2.51.1
+Standby 21 priority 90
+Standby 21 preempt
+Standby 22 ipv6 2001:db8:2:51::1/64
+Standby 22 priority 90
+Standby 22 preempt
+
+router ospf 1 
+router-id 192.1.30.13 
+passive-interface Vlan10 
+passive-interface Vlan20 
+passive-interface Vlan30 
+passive-interface Vlan40 
+passive-interface Vlan50
+passive-interface Vlan60
+
+Interface range e1/1-2
+Description Link to aal-as01
+Switchport mode trunk
+channel-group 1 mode active 
+no shut
+
+interface port-channel 1
+Description Link to aal-as01
+Switchport trunk encapsulation dot1q
+Switchport mode trunk
+Switchport trunk allow vlan 10,11,20,21,30,31,40,41,50,51,60
+no shut
+
+interface e0/0
+description link to sve-as01
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allow vlan 10,11,20,21,30,31,40,41,50,51,60
+no shut
+
+Interface e0/1
+no switchport
+description link to aal-cs01
+ip address 10.1.1.2 255.255.255.252
+no shut
+
+interface e0/2
+no switchport
+description link to sve-ds01
+ip address 10.255.0.13 255.255.255.252
+no shut
+
+interface e0/3
+no switchport
+description link to sve-cs01
+ip address 10.255.0.10 255.255.255.252
+no shut
+
+ip domain-name gruppe6.norfa.dk
+crypto key generate rsa modulus 2048
+username admin privilege 15 secret gruppe6
+enable secret gruppe6
+line vty 0 4 
+login local 
+transport input ssh 

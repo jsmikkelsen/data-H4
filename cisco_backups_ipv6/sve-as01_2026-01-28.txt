@@ -1,0 +1,192 @@
+Building configuration...
+
+Current configuration : 4436 bytes
+!
+! Last configuration change at 12:04:42 UTC Tue Jan 27 2026
+! NVRAM config last updated at 12:04:46 UTC Tue Jan 27 2026
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sve-as01
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 9 $9$hJalHs5PLV1Ni9$wmKyh6fsBrM5DAQk03pWgNUF6lCfyT4ZNAwndZA62iA
+!
+username admin privilege 15 secret 9 $9$Xy.QQhIF2XOhlf$42igM0SzEHNbEhQKy1MBV61xHzyklQQM/mENEM.LwCQ
+no aaa new-model
+switch 1 provision ws-c2960x-24pd-l
+!
+!
+!
+!
+!
+!
+ip domain-name gruppe6.norfa.dk
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3114118144
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3114118144
+ revocation-check none
+ rsakeypair TP-self-signed-3114118144
+!
+!
+crypto pki certificate chain TP-self-signed-3114118144
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33313134 31313831 3434301E 170D3236 30313237 31323034 
+  34365A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 31313431 
+  31383134 3430819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100BC57 34FACCDF 9FDEC220 F7B57086 C8F1CF9B EFA31E38 210365AF 8B77FA54 
+  FE1CDF84 323C9998 5ED4DB23 80089634 1E15325F CD5EA0DB F8BE39F3 5E0EE21B 
+  ECC89F04 EA5ADEB9 DA1E8B25 2E853585 0F282E17 2A9C66A0 82C77940 009FF17A 
+  A749CEE0 1D07FB70 DEB29A79 F2E55EE3 9A258773 831463D8 8F7C8E74 A48DDB52 
+  E7590203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 14E5604E 882CBD59 57BC21BC 8C76DABE 1F529B90 2D301D06 
+  03551D0E 04160414 E5604E88 2CBD5957 BC21BC8C 76DABE1F 529B902D 300D0609 
+  2A864886 F70D0101 05050003 818100A1 0BCC02C5 BE656CF6 81222D5F F8C4D95B 
+  0678BDFD E6B1FED9 CA628D2F D214F4B1 4305F0DD 23F0AB11 88617AD1 76715D40 
+  8C16709E BB93B7DA 61B66B05 09109356 E47E798E 88C2B15A 93BC9321 3697D22F 
+  391FB61B DDE5CE30 F0271065 93167A56 E51EA401 4A77648B 4399D1E8 636DC678 
+  8175AB28 E52C4B84 F23C5DDE C98BD2
+  	quit
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel2
+ description Link to sve-ds01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+!
+interface FastEthernet0
+ no ip address
+!
+interface GigabitEthernet1/0/1
+!
+interface GigabitEthernet1/0/2
+ description access port vmh02 mgmt
+ switchport access vlan 51
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface GigabitEthernet1/0/3
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ channel-group 2 mode active
+!
+interface GigabitEthernet1/0/4
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ channel-group 2 mode active
+!
+interface GigabitEthernet1/0/5
+ description access port vmh02
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ spanning-tree portfast edge
+!
+interface GigabitEthernet1/0/6
+ description access port vmh01
+ switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+ switchport mode trunk
+ spanning-tree portfast edge
+!
+interface GigabitEthernet1/0/7
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 40
+ switchport mode access
+ spanning-tree portfast edge
+!
+interface GigabitEthernet1/0/14
+!
+interface GigabitEthernet1/0/15
+!
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23
+!
+interface GigabitEthernet1/0/24
+!
+interface GigabitEthernet1/0/25
+!
+interface GigabitEthernet1/0/26
+!
+interface TenGigabitEthernet1/0/1
+!
+interface TenGigabitEthernet1/0/2
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan31
+ ip address 192.2.31.14 255.255.255.0
+!
+!
+ip http server
+ip http secure-server
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+ transport input ssh
+!
+!
+end

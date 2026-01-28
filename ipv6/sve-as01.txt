@@ -1,0 +1,68 @@
+hostname sve-as01
+
+vlan 10
+name aal-server
+vlan 20
+name aal-client
+vlan 30
+name aal-mgmt
+vlan 40
+name aal-wlan
+vlan 50
+name aal-vmh
+vlan 11
+name sve-server
+vlan 21
+name sve-client
+vlan 31
+name sve-mgmt
+vlan 41
+name sve-wlan
+vlan 51
+name sve-vmh
+
+Vlan 60
+Name guest
+
+interface vlan31
+ip address 192.2.31.14 255.255.255.0 
+no shut
+
+interface range GigabitEthernet1/0/3-4
+channel-group 2 mode active
+no shut
+
+interface port-channel 2
+description Link to sve-ds01
+switchport mode trunk
+switchport trunk allow vlan 10,11,20,21,30,31,40,41,50,51,60
+no shut
+
+interface GigabitEthernet1/0/2
+description access port vmh02 mgmt
+switchport mode access 
+switchport access vlan 51
+spanning-tree portfast
+no shut
+
+interface GigabitEthernet1/0/5
+description access port vmh02
+switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+switchport mode trunk
+spanning-tree portfast
+no shut
+
+interface GigabitEthernet1/0/6
+description access port vmh01
+switchport trunk allowed vlan 10,11,20,21,30,31,40,41,50,51,60
+switchport mode trunk
+spanning-tree portfast
+no shut
+
+ip domain name gruppe6.norfa.dk
+crypto key generate rsa modulus 2048
+username admin privilege 15 secret gruppe6
+enable secret gruppe6
+line vty 0 4 
+login local 
+transport input ssh 
