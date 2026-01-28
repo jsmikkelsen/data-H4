@@ -1,0 +1,135 @@
+Building configuration...
+
+  
+Current configuration : 1746 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname aal-er01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$mKZY$Bs/9X1iOb3OeE1bImMLX.0
+!
+no aaa new-model
+memory-size iomem 15
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain name gruppe6.norfa.dk
+ip cef
+ipv6 unicast-routing
+ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FCZ1807C0T4
+!
+!
+username admin privilege 15 secret 5 $1$nDKX$vc6y7YDoJwWdJ8P1b2HIB0
+!
+redundancy
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback30
+ description management
+ ip address 192.1.30.11 255.255.255.255
+ ip ospf 1 area 0
+ ipv6 address 2001:DB8:1:30::11/64
+ ipv6 ospf 1 area 0
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description isp-router
+ ip address 10.0.0.2 255.255.255.252
+ ip ospf 1 area 0
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:0:1::2/64
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/1
+ description core-switch
+ ip address 10.1.0.1 255.255.255.252
+ ip ospf 1 area 0
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:1:F1::1/64
+ ipv6 ospf 1 area 0
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 125000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 125000
+!
+router ospf 1
+ router-id 192.1.30.11
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+!
+ipv6 router ospf 1
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end
