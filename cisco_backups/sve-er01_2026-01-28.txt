@@ -1,0 +1,135 @@
+Building configuration...
+
+Current configuration : 1820 bytes
+!
+! Last configuration change at 10:01:12 UTC Wed Jan 28 2026
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sve-er01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$xKWB$SkoAUjQV9JMsfVo56VH9E1
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain name gruppe6.norfa.dk
+ip cef
+ipv6 unicast-routing
+ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FCZ1807C0TJ
+license accept end user agreement
+!
+!
+username admin privilege 15 secret 5 $1$mA4s$2MAjTUZbzHPnkQcjPK7X5/
+!
+redundancy
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback31
+ description management
+ ip address 192.2.31.11 255.255.255.255
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description isp-router
+ ip address 10.0.0.6 255.255.255.252
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:0:2::2/64
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/1
+ description core-switch
+ ip address 10.2.0.1 255.255.255.252
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:2:F1::1/64
+ ipv6 ospf 1 area 0
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 125000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 125000
+!
+!
+router eigrp 100
+ network 10.0.0.0
+ network 192.2.0.0 0.0.255.255
+ redistribute static metric 10000 10 255 1 1500
+ eigrp router-id 192.2.31.11
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.5
+!
+ipv6 router ospf 1
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end
